@@ -1,7 +1,9 @@
 const express = require("express");
 const careerRoute = require("./routes/career.route");
-const app = express();
+var cors = require("cors");
 
+const app = express();
+app.use(cors());
 app.use("/career", careerRoute);
 
 app.listen(4000, () => {
