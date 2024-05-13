@@ -10,14 +10,12 @@ const supabase = createClient(
   process.env.SUPABASE_KEY
 );
 
-const KEY_AUTH_JWT = process.env.KEY_AUTH_JWT;
-
 const getJWTToken = ({ email }) => {
   const jwtToken = jsonwebtoken.sign(
     {
       email,
     },
-    KEY_AUTH_JWT
+    process.env.KEY_AUTH_JWT
   );
 
   return jwtToken;
