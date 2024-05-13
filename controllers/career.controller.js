@@ -1,19 +1,16 @@
-const { createClient } = require("@supabase/supabase-js");
-
-// Create a single supabase client for interacting with your database]
-require("dotenv").config();
-const supabase = createClient(
-  process.env.SUPABASE_CLIENT,
-  process.env.SUPABASE_KEY
-);
+const { getCareerFromTable } = require("../utils/register.util");
 
 const getAllCareer = async (req, res) => {
-  const { data, error } = await supabase
-    .from("career")
-    .select("*,job-details(*)");
-  res.json({
-    data: data,
-  });
+  try {
+    const data = await getCareerFromTable();
+    res.status(200).json({
+      data: data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
 };
 
 module.exports = { getAllCareer };
